@@ -3,6 +3,8 @@
 
 Static library implementation of dynamic vectors in C using macros, similar to C++ std::vector.
 
+- [Usage](https://github.com/ravazque/vectors/blob/main/docs/usage.md) | Expansion of documentation for using the library in other programs.
+
 ## Supported Types
 
 - `Vector_int` (std::vector<int>)
@@ -80,27 +82,10 @@ Or add to your Makefile:
 LDFLAGS = -L/path/to/library -lvectors
 ```
 
-## Features
+---
 
-- No for loops
-- No ternary operators
-- Maximum 25 lines per function
-- Maximum 4 parameters per function
-- Maximum 5 variables per function
-- Automatic capacity growth
-- Memory management similar to C++
-
-## Notes
-
-- Initial capacity is 4 elements
-- Capacity doubles automatically when full
-- Always call `vector_TYPE_free()` to avoid memory leaks
-- Indices are not validated in `get()`, only in `set()`
-
-## Files
-
-- `vectors.h` - Header file with macros and declarations
-- `vectors.c` - Implementation file
-- `libvectors.a` - Static library (generated after make)
-- `example.c` - Usage example
-- `Makefile` - Build system
+>[!NOTE]
+>- Initial capacity is 4 elements
+>- Capacity doubles automatically when full
+>- Always call `vector_TYPE_free()` to avoid memory leaks
+>- Indices are not validated in `get()`, only in `set()`
