@@ -1,38 +1,39 @@
 
-NAME = libvectors.a
+CC     = cc
+CFLAGS = -Wall -Wextra -Werror -Iinclude
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-AR = ar rcs
-RM = rm -f
+NAME    = libvectors.a
+OBJ_DIR = objects
 
-SRCS = src/vectors.c
-OBJS = $(SRCS:.c=.o)
+SRCS = $(wildcard src/*.c)
 
-EXAMPLE = example
-EXAMPLE_SRCS = src/example.c
-EXAMPLE_OBJS = $(EXAMPLE_SRCS:.c=.o)
+OBJS = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
+
+TEST_SRC = test/test.c
+TEST_BIN = test_vectors
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
-%.o: %.c
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(EXAMPLE): $(NAME) $(EXAMPLE_OBJS)
-	$(CC) $(CFLAGS) $(EXAMPLE_OBJS) -L. -lvectors -o $(EXAMPLE)
+test: $(NAME)
+	$(CC) $(CFLAGS) $(TEST_SRC) -L. -lvectors -o $(TEST_BIN)
+	./$(TEST_BIN)
 
 clean:
-	$(RM) $(OBJS) $(EXAMPLE_OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	$(RM) $(NAME) $(EXAMPLE)
+	rm -f $(NAME)
+	rm -f $(TEST_BIN)
 
 re: fclean all
-
-test: $(EXAMPLE)
-	./$(EXAMPLE)
 
 .PHONY: all clean fclean re test

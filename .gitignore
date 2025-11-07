@@ -1,8 +1,12 @@
 .claude
 .vscode
-v1/src/example.o
-v1/src/vectors.o
-v1/example
+v1/.claude
+v1/.vscode
+v1/objects
 v1/libvectors.a
-v2/src/vectors.o
+v1/test_vectors
+v2/.claude
+v2/.vscode
+v2/objects
 v2/libvectors.a
+v2/test_vectors
