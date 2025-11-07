@@ -1,0 +1,5 @@
+.claude
+.vscode
+src/example.o
+src/vectors.o
+libvectors.a
