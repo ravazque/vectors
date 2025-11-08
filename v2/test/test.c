@@ -173,6 +173,228 @@ void	test_vector_long(void)
 	printf("\nVector freed successfully\n");
 }
 
+void	test_vector_short(void)
+{
+	Vector_short	v;
+	size_t			i;
+
+	printf("TEST VECTOR SHORT\n");
+	vector_short_init(&v);
+
+	printf("Adding elements: 100, 200, 300, -100, -200\n");
+	vector_short_push_back(&v, 100);
+	vector_short_push_back(&v, 200);
+	vector_short_push_back(&v, 300);
+	vector_short_push_back(&v, -100);
+	vector_short_push_back(&v, -200);
+
+	printf("\nVector content:\n");
+	i = 0;
+	while (i < vector_short_size(&v))
+	{
+		printf("v[%zu] = %d\n", i, vector_short_get(&v, i));
+		i++;
+	}
+
+	vector_short_free(&v);
+	printf("\nVector freed successfully\n");
+}
+
+void	test_vector_uint(void)
+{
+	Vector_uint	v;
+	size_t		i;
+
+	printf("TEST VECTOR UNSIGNED INT\n");
+	vector_uint_init(&v);
+
+	printf("Adding elements: 1000, 2000, 3000, 4000\n");
+	vector_uint_push_back(&v, 1000);
+	vector_uint_push_back(&v, 2000);
+	vector_uint_push_back(&v, 3000);
+	vector_uint_push_back(&v, 4000);
+
+	printf("\nVector content:\n");
+	i = 0;
+	while (i < vector_uint_size(&v))
+	{
+		printf("v[%zu] = %u\n", i, vector_uint_get(&v, i));
+		i++;
+	}
+
+	vector_uint_free(&v);
+	printf("\nVector freed successfully\n");
+}
+
+void	test_vector_ulong(void)
+{
+	Vector_ulong	v;
+	size_t			i;
+
+	printf("TEST VECTOR UNSIGNED LONG\n");
+	vector_ulong_init(&v);
+
+	printf("Adding elements: 5000000, 10000000, 15000000\n");
+	vector_ulong_push_back(&v, 5000000UL);
+	vector_ulong_push_back(&v, 10000000UL);
+	vector_ulong_push_back(&v, 15000000UL);
+
+	printf("\nVector content:\n");
+	i = 0;
+	while (i < vector_ulong_size(&v))
+	{
+		printf("v[%zu] = %lu\n", i, vector_ulong_get(&v, i));
+		i++;
+	}
+
+	vector_ulong_free(&v);
+	printf("\nVector freed successfully\n");
+}
+
+void	test_vector_uchar(void)
+{
+	Vector_uchar	v;
+	size_t			i;
+
+	printf("TEST VECTOR UNSIGNED CHAR\n");
+	vector_uchar_init(&v);
+
+	printf("Adding elements: 65, 66, 67, 255, 0\n");
+	vector_uchar_push_back(&v, 65);
+	vector_uchar_push_back(&v, 66);
+	vector_uchar_push_back(&v, 67);
+	vector_uchar_push_back(&v, 255);
+	vector_uchar_push_back(&v, 0);
+
+	printf("\nVector content:\n");
+	i = 0;
+	while (i < vector_uchar_size(&v))
+	{
+		printf("v[%zu] = %u (char: '%c')\n", i, vector_uchar_get(&v, i),
+			vector_uchar_get(&v, i));
+		i++;
+	}
+
+	vector_uchar_free(&v);
+	printf("\nVector freed successfully\n");
+}
+
+void	test_vector_llong(void)
+{
+	Vector_llong	v;
+	size_t			i;
+
+	printf("TEST VECTOR LONG LONG\n");
+	vector_llong_init(&v);
+
+	printf("Adding elements: 9000000000, -9000000000, 123456789012345\n");
+	vector_llong_push_back(&v, 9000000000LL);
+	vector_llong_push_back(&v, -9000000000LL);
+	vector_llong_push_back(&v, 123456789012345LL);
+
+	printf("\nVector content:\n");
+	i = 0;
+	while (i < vector_llong_size(&v))
+	{
+		printf("v[%zu] = %lld\n", i, vector_llong_get(&v, i));
+		i++;
+	}
+
+	vector_llong_free(&v);
+	printf("\nVector freed successfully\n");
+}
+
+void	test_vector_ullong(void)
+{
+	Vector_ullong	v;
+	size_t			i;
+
+	printf("TEST VECTOR UNSIGNED LONG LONG\n");
+	vector_ullong_init(&v);
+
+	printf("Adding elements: 18000000000, 987654321098765, 1\n");
+	vector_ullong_push_back(&v, 18000000000ULL);
+	vector_ullong_push_back(&v, 987654321098765ULL);
+	vector_ullong_push_back(&v, 1ULL);
+
+	printf("\nVector content:\n");
+	i = 0;
+	while (i < vector_ullong_size(&v))
+	{
+		printf("v[%zu] = %llu\n", i, vector_ullong_get(&v, i));
+		i++;
+	}
+
+	vector_ullong_free(&v);
+	printf("\nVector freed successfully\n");
+}
+
+void	test_vector_sizet(void)
+{
+	Vector_sizet	v;
+	size_t			i;
+
+	printf("TEST VECTOR SIZE_T\n");
+	vector_sizet_init(&v);
+
+	printf("Adding elements: 0, 42, 1000, 999999\n");
+	vector_sizet_push_back(&v, 0);
+	vector_sizet_push_back(&v, 42);
+	vector_sizet_push_back(&v, 1000);
+	vector_sizet_push_back(&v, 999999);
+
+	printf("\nVector content:\n");
+	i = 0;
+	while (i < vector_sizet_size(&v))
+	{
+		printf("v[%zu] = %zu\n", i, vector_sizet_get(&v, i));
+		i++;
+	}
+
+	vector_sizet_free(&v);
+	printf("\nVector freed successfully\n");
+}
+
+void	test_vector_ptr(void)
+{
+	Vector_ptr	v;
+	size_t		i;
+	int			a;
+	int			b;
+	int			c;
+
+	a = 111;
+	b = 222;
+	c = 333;
+	printf("TEST VECTOR PTR (void*)\n");
+	vector_ptr_init(&v);
+
+	printf("Adding pointers to integers: &a, &b, &c\n");
+	vector_ptr_push_back(&v, &a);
+	vector_ptr_push_back(&v, &b);
+	vector_ptr_push_back(&v, &c);
+	vector_ptr_push_back(&v, NULL);
+
+	printf("\nVector content:\n");
+	i = 0;
+	while (i < vector_ptr_size(&v))
+	{
+		if (vector_ptr_get(&v, i) == NULL)
+		{
+			printf("v[%zu] = NULL\n", i);
+		}
+		else
+		{
+			printf("v[%zu] = %p (value: %d)\n", i, vector_ptr_get(&v, i),
+				*(int *)vector_ptr_get(&v, i));
+		}
+		i++;
+	}
+
+	vector_ptr_free(&v);
+	printf("\nVector freed successfully\n");
+}
+
 void	test_multiple_init(void)
 {
 	Vector_int		v_int;
@@ -252,6 +474,30 @@ int	main(void)
 
 	print_separator();
 	test_vector_long();
+
+	print_separator();
+	test_vector_short();
+
+	print_separator();
+	test_vector_uint();
+
+	print_separator();
+	test_vector_ulong();
+
+	print_separator();
+	test_vector_uchar();
+
+	print_separator();
+	test_vector_llong();
+
+	print_separator();
+	test_vector_ullong();
+
+	print_separator();
+	test_vector_sizet();
+
+	print_separator();
+	test_vector_ptr();
 
 	print_separator();
 	test_multiple_init();

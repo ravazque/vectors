@@ -8,7 +8,7 @@ void	vector_double_init(Vector_double *v)
 	v->data = malloc(v->capacity * sizeof(double));
 }
 
-void	vector_double_resize(Vector_double *v)
+static void	vector_double_resize(Vector_double *v)
 {
 	size_t	new_cap;
 	double	*new_data;

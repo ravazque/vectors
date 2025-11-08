@@ -26,15 +26,14 @@ Implementation using **preprocessor macros** to generate code.
 | Feature | V1 (Macros) | V2 (Modular) |
 |---------|-------------|--------------|
 | **Implementation Style** | Preprocessor macros | Separate files per type |
-| **Source code size** | ~100 lines (macros) | ~500 lines (explicit code) |
-| **Source files** | 1 main file | 7 files (6 types + utils) |
+| **Available types** | 6 basic types | 14 types (including extended types) |
 | **Readability** | Requires understanding macros | Explicit and direct code |
 | **Maintainability** | Modifying macros affects everything | Each type independent |
 | **Debugging** | Harder (generated code) | Easier (direct code) |
 | **Extensibility** | Add 1 macro line | Create new .c file |
 | **Compile time** | Slightly faster | Slightly slower |
 | **Utility functions** | Not included | `init_multiple`, `free_multiple` |
-| **Test suite** | Basic example | Complete and exhaustive suite |
+| **Test suite** | Basic example | Complete and exhaustive suite (14 tests) |
 | **`clear()` function** | Included | Not included |
 | **Binary size** | Identical | Identical |
 
@@ -65,9 +64,10 @@ Implementation using **preprocessor macros** to generate code.
 - Each type is independent and modifiable
 - Easy to understand for beginners
 - Includes utility functions (`init_multiple`, `free_multiple`)
-- Complete and organized test suite
 - Clearer compiler error messages
 - Better for learning
+- Extended type support (14 total types vs 6 in V1)
+- Includes specialized types: short, unsigned variants, long long, size_t, and generic pointers
 
 #### Disadvantages
 - More source code (repetition between types)
@@ -114,14 +114,25 @@ void vector_init_multiple(int count, ...);  // Initialize multiple vectors
 void vector_free_multiple(int count, ...);  // Free multiple vectors
 ```
 
-## Available Types (Both Versions)
+## Available Types
 
-- `Vector_int` - Integer vector
-- `Vector_float` - Float vector
-- `Vector_double` - Double vector
-- `Vector_char` - Character vector
-- `Vector_bool` - Boolean vector
-- `Vector_long` - Long vector
+### Both Versions (V1 and V2)
+- `Vector_int` - Integer vector (`int`)
+- `Vector_float` - Float vector (`float`)
+- `Vector_double` - Double precision vector (`double`)
+- `Vector_char` - Character vector (`char`)
+- `Vector_bool` - Boolean vector (`int` as bool)
+- `Vector_long` - Long integer vector (`long`)
+
+### V2 Only (Additional 8 Types)
+- `Vector_short` - Short integer vector (`short`)
+- `Vector_uint` - Unsigned integer vector (`unsigned int`)
+- `Vector_ulong` - Unsigned long vector (`unsigned long`)
+- `Vector_uchar` - Unsigned character vector (`unsigned char`)
+- `Vector_llong` - Long long integer vector (`long long`)
+- `Vector_ullong` - Unsigned long long vector (`unsigned long long`)
+- `Vector_sizet` - Size type vector (`size_t`)
+- `Vector_ptr` - Generic pointer vector (`void*`)
 
 ## Usage Example (Both Versions)
 
@@ -187,10 +198,7 @@ Both versions share:
 - **Growth strategy:** Doubling (x2)
 - **Memory management:** Manual (you must call `_free`)
 - **Validation:** Only in `set()`, not in `get()`
-- **No `for` loops:** Uses `while` loops
-- **No ternary operators:** Uses `if` statements
 - **Strict compilation:** `-Wall -Wextra -Werror`
-- **Compatible:** 42 norms, MISRA, etc.
 
 ## Identical Behavior
 
@@ -203,39 +211,6 @@ Runtime behavior is **identical** between both versions:
 - Same error handling
 
 The only real difference is in **how the source code is organized**.
-
-## Repository Structure
-
-```
-vectors/
-├── README.md              # This file
-├── v1/                    # Macro version
-│   ├── include/
-│   │   └── vectors.h
-│   ├── src/
-│   │   ├── vectors.c
-│   │   └── test.c
-│   ├── docs/
-│   │   └── README.md
-│   └── Makefile
-└── v2/                    # Modular version
-    ├── include/
-    │   ├── vectors.h
-    │   └── structs.h
-    ├── src/
-    │   ├── vector_int.c
-    │   ├── vector_float.c
-    │   ├── vector_double.c
-    │   ├── vector_char.c
-    │   ├── vector_bool.c
-    │   ├── vector_long.c
-    │   └── vector_utils.c
-    ├── test/
-    │   └── test.c
-    ├── docs/
-    │   └── README.md
-    └── Makefile
-```
 
 ## When to Use Each Version
 
@@ -254,10 +229,5 @@ vectors/
 - You work in a team (easier to review)
 - You need utility functions (`init_multiple`, `free_multiple`)
 - You value modularity and separation of concerns
-- You want complete tests included
-
-## Additional Documentation
-
-- [Complete V1 documentation](v1/docs/README.md)
-- [Complete V2 documentation](v2/docs/README.md)
-
+- You need extended types (unsigned variants, long long, size_t, pointers)
+- You need a production-ready, well-tested library

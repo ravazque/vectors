@@ -1,43 +1,43 @@
 
 #include "../include/vectors.h"
 
-void	vector_bool_init(Vector_bool *v)
+void	vector_ptr_init(Vector_ptr *v)
 {
 	v->size = 0;
 	v->capacity = 4;
-	v->data = malloc(v->capacity * sizeof(int));
+	v->data = malloc(v->capacity * sizeof(void *));
 }
 
-static void	vector_bool_resize(Vector_bool *v)
+static void	vector_ptr_resize(Vector_ptr *v)
 {
 	size_t	new_cap;
-	int		*new_data;
+	void	**new_data;
 
 	new_cap = v->capacity * 2;
-	new_data = realloc(v->data, new_cap * sizeof(int));
+	new_data = realloc(v->data, new_cap * sizeof(void *));
 	v->data = new_data;
 	v->capacity = new_cap;
 }
 
-void	vector_bool_push_back(Vector_bool *v, int value)
+void	vector_ptr_push_back(Vector_ptr *v, void *value)
 {
 	size_t	is_full;
 
 	is_full = v->size >= v->capacity;
 	if (is_full)
 	{
-		vector_bool_resize(v);
+		vector_ptr_resize(v);
 	}
 	v->data[v->size] = value;
 	v->size++;
 }
 
-int	vector_bool_get(Vector_bool *v, size_t index)
+void	*vector_ptr_get(Vector_ptr *v, size_t index)
 {
 	return (v->data[index]);
 }
 
-void	vector_bool_set(Vector_bool *v, size_t index, int value)
+void	vector_ptr_set(Vector_ptr *v, size_t index, void *value)
 {
 	int	is_valid;
 
@@ -48,17 +48,17 @@ void	vector_bool_set(Vector_bool *v, size_t index, int value)
 	}
 }
 
-size_t	vector_bool_size(Vector_bool *v)
+size_t	vector_ptr_size(Vector_ptr *v)
 {
 	return (v->size);
 }
 
-size_t	vector_bool_capacity(Vector_bool *v)
+size_t	vector_ptr_capacity(Vector_ptr *v)
 {
 	return (v->capacity);
 }
 
-void	vector_bool_free(Vector_bool *v)
+void	vector_ptr_free(Vector_ptr *v)
 {
 	free(v->data);
 	v->data = NULL;

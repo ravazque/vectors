@@ -8,7 +8,7 @@ void	vector_float_init(Vector_float *v)
 	v->data = malloc(v->capacity * sizeof(float));
 }
 
-void	vector_float_resize(Vector_float *v)
+static void	vector_float_resize(Vector_float *v)
 {
 	size_t	new_cap;
 	float	*new_data;

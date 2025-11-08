@@ -8,7 +8,7 @@ void	vector_long_init(Vector_long *v)
 	v->data = malloc(v->capacity * sizeof(long));
 }
 
-void	vector_long_resize(Vector_long *v)
+static void	vector_long_resize(Vector_long *v)
 {
 	size_t	new_cap;
 	long	*new_data;

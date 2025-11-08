@@ -8,7 +8,7 @@ void	vector_char_init(Vector_char *v)
 	v->data = malloc(v->capacity * sizeof(char));
 }
 
-void	vector_char_resize(Vector_char *v)
+static void	vector_char_resize(Vector_char *v)
 {
 	size_t	new_cap;
 	char	*new_data;

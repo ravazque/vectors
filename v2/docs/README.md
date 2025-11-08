@@ -10,10 +10,11 @@ Modular implementation of dynamic vectors in C, similar to C++ `std::vector`, wi
 - Automatic capacity growth (doubling)
 - Utility functions for multiple vector management
 - Consistent and clean API
-- No `for` loops or ternary operators
 - Manual memory management
 
 ## Available Types
+
+### Basic Types (6)
 
 | C Type | Vector Type | C++ Equivalent |
 |--------|-------------|----------------|
@@ -21,8 +22,23 @@ Modular implementation of dynamic vectors in C, similar to C++ `std::vector`, wi
 | `float` | `Vector_float` | `std::vector<float>` |
 | `double` | `Vector_double` | `std::vector<double>` |
 | `char` | `Vector_char` | `std::vector<char>` |
-| `int` | `Vector_bool` | `std::vector<bool>` |
+| `int` (as bool) | `Vector_bool` | `std::vector<bool>` |
 | `long` | `Vector_long` | `std::vector<long>` |
+
+### Extended Types (8)
+
+| C Type | Vector Type | C++ Equivalent |
+|--------|-------------|----------------|
+| `short` | `Vector_short` | `std::vector<short>` |
+| `unsigned int` | `Vector_uint` | `std::vector<unsigned int>` |
+| `unsigned long` | `Vector_ulong` | `std::vector<unsigned long>` |
+| `unsigned char` | `Vector_uchar` | `std::vector<unsigned char>` |
+| `long long` | `Vector_llong` | `std::vector<long long>` |
+| `unsigned long long` | `Vector_ullong` | `std::vector<unsigned long long>` |
+| `size_t` | `Vector_sizet` | `std::vector<size_t>` |
+| `void*` | `Vector_ptr` | `std::vector<void*>` |
+
+**Total: 14 fully implemented vector types**
 
 ## Functions API
 
@@ -183,16 +199,31 @@ This generates:
 
 ## Test Suite
 
-V2 includes a complete test suite in `test/test.c` that verifies:
+V2 includes a comprehensive test suite in `test/test.c` that verifies all 14 vector types:
 
-- Integer vector (int)
-- Float vector (float)
-- Double vector (double)
-- Character vector (char)
-- Boolean vector (bool)
-- Long vector (long)
+### Basic Types Tests (6)
+- Integer vector (`int`)
+- Float vector (`float`)
+- Double vector (`double`)
+- Character vector (`char`)
+- Boolean vector (`bool`)
+- Long vector (`long`)
+
+### Extended Types Tests (8)
+- Short vector (`short`)
+- Unsigned integer vector (`unsigned int`)
+- Unsigned long vector (`unsigned long`)
+- Unsigned char vector (`unsigned char`)
+- Long long vector (`long long`)
+- Unsigned long long vector (`unsigned long long`)
+- Size_t vector (`size_t`)
+- Pointer vector (`void*`)
+
+### Utility Functions Tests
 - Multiple initialization
 - Multiple freeing
+
+**Total: 14 type tests + 2 utility tests = 16 comprehensive tests**
 
 Run the tests with:
 ```bash
@@ -224,21 +255,6 @@ your_program: your_program.c
 
 ## Technical Implementation
 
-### Modular Approach
-
-This version uses **separate files** for each type:
-
-```
-src/
-├── vector_int.c       # Implementation for int
-├── vector_float.c     # Implementation for float
-├── vector_double.c    # Implementation for double
-├── vector_char.c      # Implementation for char
-├── vector_bool.c      # Implementation for bool
-├── vector_long.c      # Implementation for long
-└── vector_utils.c     # Utility functions
-```
-
 ### Advantages
 - Organized and maintainable code
 - Each type in its own file
@@ -264,7 +280,14 @@ typedef enum {
     TYPE_CHAR,
     TYPE_BOOL,
     TYPE_LONG,
-    // ... other types
+    TYPE_SHORT,
+    TYPE_UINT,
+    TYPE_ULONG,
+    TYPE_UCHAR,
+    TYPE_LLONG,
+    TYPE_ULLONG,
+    TYPE_SIZET,
+    TYPE_PTR
 } VectorType;
 ```
 
@@ -278,39 +301,19 @@ typedef enum {
 | Index validation | Only in `set()`, not in `get()` |
 | Resizing | Automatic on `push_back` |
 
-## Project Files
-
-```
-v2/
-├── include/
-│   ├── vectors.h          # Function declarations
-│   └── structs.h          # Structure definitions
-├── src/
-│   ├── vector_int.c       # int implementation
-│   ├── vector_float.c     # float implementation
-│   ├── vector_double.c    # double implementation
-│   ├── vector_char.c      # char implementation
-│   ├── vector_bool.c      # bool implementation
-│   ├── vector_long.c      # long implementation
-│   └── vector_utils.c     # Utility functions
-├── test/
-│   └── test.c             # Complete test suite
-├── docs/
-│   └── README.md          # This documentation
-└── Makefile               # Build system
-```
-
 ## Differences from V1
 
 | Feature | V1 (Macros) | V2 (Modular) |
 |---------|-------------|--------------|
 | Implementation | Preprocessor macros | Separate files |
-| Organization | One source file | Multiple files |
+| Organization | One source file | 15 source files |
+| Available types | 6 basic types | 14 types (6 basic + 8 extended) |
 | Maintainability | Less code, more abstract | More code, more explicit |
 | Debugging | Harder | Easier |
-| Extensibility | Add one macro line | Create new file |
+| Extensibility | Add one macro line | Create new file (~70 lines) |
 | Utility functions | Not included | `init_multiple`, `free_multiple` |
-| Test suite | Basic example | Complete suite |
+| Test suite | Basic example | Comprehensive suite (16 tests) |
+| Extended types | No | Yes (unsigned, long long, size_t, ptr) |
 
 ## Important Notes
 
@@ -322,12 +325,27 @@ v2/
 - Code compatible with strict standards (42, MISRA, etc.)
 - Compiles with `-Wall -Wextra -Werror` without warnings
 - Tests run automatically with `make test`
+- All 14 types are **fully implemented and tested**
 
-## Additional Types in structs.h
+## Type-Specific Considerations
 
-Besides the basic types, `structs.h` includes definitions for:
-- `Vector_short`, `Vector_uint`, `Vector_ulong`, `Vector_uchar`
-- `Vector_llong`, `Vector_ullong`, `Vector_sizet`
-- `Vector_ptr` (for generic pointers)
+### Vector_ptr (void*)
+- Stores generic pointers (`void*`)
+- Can store `NULL` pointers
+- User is responsible for managing pointed-to memory
+- Does not automatically free pointed-to objects
 
-These types are defined but not implemented. You can implement them following the same pattern as the basic types.
+### Unsigned Types
+- `Vector_uint`, `Vector_ulong`, `Vector_uchar`, `Vector_ullong`
+- Useful for values that are always non-negative
+- Provides full range of positive values for the type
+
+### Long Long Types
+- `Vector_llong`, `Vector_ullong`
+- Support for very large integers (64-bit)
+- Useful for timestamps, large counters, etc.
+
+### Vector_sizet
+- Uses `size_t` type (platform-dependent unsigned integer)
+- Ideal for array indices, object sizes, memory operations
+- Guaranteed to hold the size of any object

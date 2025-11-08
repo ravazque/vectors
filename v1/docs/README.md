@@ -9,7 +9,6 @@ Dynamic vector implementation in C using **preprocessor macros**, similar to C++
 - Implementation using **preprocessor macros**
 - Automatic capacity growth (doubling)
 - Consistent and clean API
-- No `for` loops or ternary operators
 - Manual memory management
 
 ## Available Types
@@ -184,20 +183,6 @@ typedef struct {
 | Memory management | Manual (requires `_free`) |
 | Index validation | Only in `set()`, not in `get()` |
 | `clear()` vs `free()` | `clear()` empties but keeps capacity |
-
-## Project Files
-
-```
-v1/
-├── include/
-│   └── vectors.h          # Macros and declarations
-├── src/
-│   ├── vectors.c          # Generated implementations
-│   └── test.c             # Usage examples
-├── docs/
-│   └── README.md          # This documentation
-└── Makefile               # Build system
-```
 
 ## Important Notes
 
