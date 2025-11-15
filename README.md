@@ -7,14 +7,14 @@ This repository contains **two different versions** of the same library, each wi
 
 ## Available Versions
 
-### [V1 - Macro Approach](v1/docs/README.md)
+### [Macro Approach](macro-vectors/docs/README.md)
 Implementation using **preprocessor macros** to generate code.
 
 **Approach:** Code generation via macros
 **Files:** Compact code, all in one source file
 **Ideal for:** Projects seeking minimalism and DRY (Don't Repeat Yourself)
 
-### [V2 - Modular Approach](v2/docs/README.md)
+### [Modular Approach](modular-vectors/docs/README.md)
 **Modular** implementation with separate files per type.
 
 **Approach:** Explicit code in separate files
@@ -23,7 +23,7 @@ Implementation using **preprocessor macros** to generate code.
 
 ## Version Comparison
 
-| Feature | V1 (Macros) | V2 (Modular) |
+| Feature | Macro Approach | Modular Approach |
 |---------|-------------|--------------|
 | **Implementation Style** | Preprocessor macros | Separate files per type |
 | **Available types** | 6 basic types | 14 types (including extended types) |
@@ -39,7 +39,7 @@ Implementation using **preprocessor macros** to generate code.
 
 ## Advantages and Disadvantages
 
-### V1 - Macros
+### Macro Approach
 
 #### Advantages
 - Very compact source code (DRY principle)
@@ -56,7 +56,7 @@ Implementation using **preprocessor macros** to generate code.
 - Less fine control over each type
 - Doesn't include utility functions like `init_multiple`
 
-### V2 - Modular
+### Modular Approach
 
 #### Advantages
 - Explicit and easy-to-read code
@@ -66,7 +66,7 @@ Implementation using **preprocessor macros** to generate code.
 - Includes utility functions (`init_multiple`, `free_multiple`)
 - Clearer compiler error messages
 - Better for learning
-- Extended type support (14 total types vs 6 in V1)
+- Extended type support (14 total type)
 - Includes specialized types: short, unsigned variants, long long, size_t, and generic pointers
 
 #### Disadvantages
@@ -103,12 +103,12 @@ void vector_TYPE_free(Vector_TYPE *v);
 
 ### API Differences
 
-**V1 only:**
+**Macro Approach only:**
 ```c
 void vector_TYPE_clear(Vector_TYPE *v);  // Empty the vector keeping capacity
 ```
 
-**V2 only:**
+**Modular Approach only:**
 ```c
 void vector_init_multiple(int count, ...);  // Initialize multiple vectors
 void vector_free_multiple(int count, ...);  // Free multiple vectors
@@ -116,7 +116,7 @@ void vector_free_multiple(int count, ...);  // Free multiple vectors
 
 ## Available Types
 
-### Both Versions (V1 and V2)
+### Both Versions
 - `Vector_int` - Integer vector (`int`)
 - `Vector_float` - Float vector (`float`)
 - `Vector_double` - Double precision vector (`double`)
@@ -124,7 +124,7 @@ void vector_free_multiple(int count, ...);  // Free multiple vectors
 - `Vector_bool` - Boolean vector (`int` as bool)
 - `Vector_long` - Long integer vector (`long`)
 
-### V2 Only (Additional 8 Types)
+### Modular Approach Only (Additional 8 Types)
 - `Vector_short` - Short integer vector (`short`)
 - `Vector_uint` - Unsigned integer vector (`unsigned int`)
 - `Vector_ulong` - Unsigned long vector (`unsigned long`)
@@ -167,7 +167,7 @@ Both versions compile the same way:
 
 ```bash
 # Enter the desired version directory
-cd v1  # or cd v2
+cd macro-vectors  # or cd modular-vectors
 
 # Build the library
 make
@@ -183,11 +183,11 @@ make fclean
 ### Using in Projects
 
 ```bash
-# Compile with V1
-cc -Wall -Wextra -Werror your_program.c -Lv1 -lvectors -o your_program
+# Compile with Macro Approach
+cc -Wall -Wextra -Werror your_program.c -Lmacro-vectors -lvectors -o your_program
 
-# Compile with V2
-cc -Wall -Wextra -Werror -Iv2/include your_program.c -Lv2 -lvectors -o your_program
+# Compile with Modular Approach
+cc -Wall -Wextra -Werror -Imodular-vectors/include your_program.c -Lmodular-vectors -lvectors -o your_program
 ```
 
 ## Common Features
@@ -214,7 +214,7 @@ The only real difference is in **how the source code is organized**.
 
 ## When to Use Each Version
 
-### Use V1 if:
+### Use Macro Approach if:
 - You prefer compact and DRY code
 - You understand and feel comfortable with macros
 - You want to minimize the number of files
@@ -222,7 +222,7 @@ The only real difference is in **how the source code is organized**.
 - You value automatic consistency between types
 - You're learning about C metaprogramming
 
-### Use V2 if:
+### Use Modular Approach if:
 - You prefer explicit and clear code
 - You're learning C or dynamic vectors
 - You need to debug frequently

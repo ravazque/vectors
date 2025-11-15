@@ -1,5 +1,5 @@
 
-# Vectors V2 - Dynamic Vector Library in C (Modular)
+# Vectors - Dynamic Vector Library in C (Modular Approach)
 
 Modular implementation of dynamic vectors in C, similar to C++ `std::vector`, with separate files per type.
 
@@ -199,7 +199,7 @@ This generates:
 
 ## Test Suite
 
-V2 includes a comprehensive test suite in `test/test.c` that verifies all 14 vector types:
+This version includes a comprehensive test suite in `test/test.c` that verifies all 14 vector types:
 
 ### Basic Types Tests (6)
 - Integer vector (`int`)
@@ -240,8 +240,8 @@ cc -Wall -Wextra -Werror -Iinclude your_program.c -L. -lvectors -o your_program
 ### Option 2: Makefile
 ```makefile
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I/path/to/v2/include
-LDFLAGS = -L/path/to/v2 -lvectors
+CFLAGS = -Wall -Wextra -Werror -I/path/to/modular-vectors/include
+LDFLAGS = -L/path/to/modular-vectors -lvectors
 
 your_program: your_program.c
 	$(CC) $(CFLAGS) $< $(LDFLAGS) -o $@
@@ -301,9 +301,9 @@ typedef enum {
 | Index validation | Only in `set()`, not in `get()` |
 | Resizing | Automatic on `push_back` |
 
-## Differences from V1
+## Differences from Macro Approach
 
-| Feature | V1 (Macros) | V2 (Modular) |
+| Feature | Macro Approach | Modular Approach |
 |---------|-------------|--------------|
 | Implementation | Preprocessor macros | Separate files |
 | Organization | One source file | 15 source files |

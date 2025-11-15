@@ -1,5 +1,5 @@
 
-# Vectors V1 - Dynamic Vector Library in C (Macros)
+# Vectors - Dynamic Vector Library in C (Macro Approach)
 
 Dynamic vector implementation in C using **preprocessor macros**, similar to C++ `std::vector`.
 
@@ -130,7 +130,7 @@ cc -Wall -Wextra -Werror your_program.c -L. -lvectors -o your_program
 ```makefile
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -L/path/to/v1 -lvectors
+LDFLAGS = -L/path/to/macro-vectors -lvectors
 
 your_program: your_program.c
 	$(CC) $(CFLAGS) $< $(LDFLAGS) -o $@
